@@ -2,7 +2,8 @@ import './index.css'
 
 const PasswordItem = props => {
   const {passwordItem, isHidden, deleteCredential} = props
-  const {id, siteUrl, username, password} = passwordItem
+  const {id, siteUrl, username, password, randomColor} = passwordItem
+  const {r, g, b} = randomColor
 
   const onDelete = () => deleteCredential(id)
 
@@ -19,17 +20,20 @@ const PasswordItem = props => {
   return (
     <li className="password-item">
       <div className="credential-details-container">
-        <div className="site-logo-container">
+        <div
+          className="site-logo-container"
+          style={{backgroundColor: `rgb(${r}, ${g}, ${b})`}}
+        >
           <p>{siteUrl[0].toUpperCase()}</p>
         </div>
-        <div>
+        <div className="texts-container">
           <p className="site-url">{siteUrl}</p>
           <p className="username">{username}</p>
           <div className="masked-password-box">{passwordChar}</div>
         </div>
       </div>
       <button
-        testid="delete"
+        data-testid="delete"
         className="delete-btn"
         type="button"
         onClick={onDelete}
